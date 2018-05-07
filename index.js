@@ -7,7 +7,8 @@
 */
 
 export default class Wheel {
-  constructor() {
+  constructor(elm) {
+    this.elm = elm;
     this.touchStartY = 0;
     this.wheelTimer = null;
     this.isWheeling = false;
@@ -22,7 +23,7 @@ export default class Wheel {
     this.scrollUp = null;
 
     // For mouse.
-    this.elm.scene.addEventListener('wheel', (e) => {
+    this.elm.addEventListener('wheel', (e) => {
       e.preventDefault();
 
       // Fire only the first time.
@@ -47,11 +48,11 @@ export default class Wheel {
     });
 
     // For touch panel.
-    this.elm.scene.addEventListener('touchstart', (e) => {
+    this.elm.addEventListener('touchstart', (e) => {
       this.touchStartY = e.touches[0].clientY;
     }, false);
 
-    this.elm.scene.addEventListener('touchmove', (e) => {
+    this.elm.addEventListener('touchmove', (e) => {
       e.preventDefault();
 
       if (this.isTouchMoving === false) {
@@ -70,7 +71,7 @@ export default class Wheel {
       }
     }, false);
 
-    this.elm.scene.addEventListener('touchend', (e) => {
+    this.elm.addEventListener('touchend', (e) => {
       this.isTouchMoving = false;
     }, false);
   }
